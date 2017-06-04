@@ -3,9 +3,10 @@ import os
 import sys
 import pickle
 import time
+import thread
 
-#HOST = '127.0.0.1'              # Endereco IP do Servidor
-PORT = 5000            # Porta que o Servidor esta
+
+PORT = 5000
 tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 peers = list()
@@ -13,48 +14,60 @@ peers = list()
 
 def cliente(host):
     dest = (host, PORT)
+    first = True
     tcp.connect(dest)
-    jpeers = tcp.recv(1024)
-    print jpeers
-    recpeers = pickle.loads(jpeers)
-    while True:
-        #tcp.send (msg)
-        lpeers = tcp.recv(1024)
-        if lpeers != jpeers:
-            jpeers = lpeers
-            recpeers = pickle.loads(jpeers)
-        #print jpeers
-        
-    tcp.close()
-    if recpeers[0] == HOST:
-        servidor()
-    else:
-        cliente(msg[0])
+    try:
+        while True:        
+            lpeers = tcp.recv(1024)        
+            recpeers = pickle.loads(lpeers)
+            if first:
+                meu_host = recpeers[-1]
+                print meu_host
+                first = False
+            print recpeers
+    except:
+        tcp.close()
+        if recpeers[0] == meu_host:
+            servidor(meu_host[0])
+        else:
+            cliente(recpeers[0])
 
 def servidor(host):
     orig = (host, PORT)
     tcp.bind(orig)
     tcp.listen(1)
     print 'Servidor'
+    try:
+        while True:
+            con, cliente = tcp.accept()
+            thread.start_new_thread(conectado, tuple([con, cliente]))
+    finally:
+        tcp.close()
+
+
+def conectado(con, cliente):
+    global peers
     while True:
-        con, cliente = tcp.accept()
-        pid = os.fork()
-        if pid == 0:
-            tcp.close()
-            print 'Conectado por', cliente
-            peers.append(cliente)
-            print peers
-            jpeers = pickle.dumps(peers)
-            print jpeers
-            while True:
-                con.sendall(jpeers)
-                time.sleep(15)
-                #print cliente, msg
-            print 'Finalizando conexao do cliente', cliente
-            con.close()
-            sys.exit(0)
-        else:
-            con.close()
+        print 'Conectado por', cliente
+        peers.append(cliente)
+        print peers                
+        while True:
+            try:
+                jpeers = pickle.dumps(peers)
+                con.sendall(jpeers)                
+                time.sleep(2)
+            except:
+                peers.remove(cliente)
+                print 'Finalizando conexao do cliente', cliente
+                con.close()
+                thread.exit()               
+                break
+
+
+
+
+
+
 
 
 if len(sys.argv) != 3:
