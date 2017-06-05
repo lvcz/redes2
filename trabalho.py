@@ -7,12 +7,12 @@ import thread
 
 
 PORT = 5000
-tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 peers = list()
 
 
 def cliente(host):
+    tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     dest = (host, PORT)
     first = True
     tcp.connect(dest)
@@ -25,6 +25,7 @@ def cliente(host):
                 print meu_host
                 first = False
             print recpeers
+            print meu_host[0]
     except:
         tcp.close()
         if recpeers[0] == meu_host:
@@ -33,6 +34,8 @@ def cliente(host):
             cliente(recpeers[0])
 
 def servidor(host):
+    tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    tcp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     orig = (host, PORT)
     tcp.bind(orig)
     tcp.listen(1)
@@ -60,9 +63,8 @@ def conectado(con, cliente):
                 peers.remove(cliente)
                 print 'Finalizando conexao do cliente', cliente
                 con.close()
-                thread.exit()               
+                thread.exit()         
                 break
-
 
 
 
@@ -76,4 +78,3 @@ elif sys.argv[1] =='-s':
     servidor(sys.argv[2])
 elif sys.argv[1] == '-c':
     cliente(sys.argv[2])
-    
