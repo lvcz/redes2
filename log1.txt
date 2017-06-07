@@ -1,0 +1,21 @@
+----------------------------------------------------------------------------
+Inciando a execucao do programa como o peer de id: 0
+----------------------------------------------------------------------------
+aguardando todos os peers
+peer conectado: 1
+peer conectado: 2
+peer conectado: 3
+Lider Alterado, novo lider:  0
+Lider Alterado, novo lider:  0
+Heartbeat do id: 1
+todos os peers estao conectados
+Lider Alterado, novo lider:  0
+Lider Alterado, novo lider:  0
+Heartbeat do id: 3
+Heartbeat do id: 2
+Heartbeat do id: 1
+Heartbeat do id: 3
+Heartbeat do id: 2
+Heartbeat do id: 1
+Heartbeat do id: 3
+Heartbeat do id: 2

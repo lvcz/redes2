@@ -29,6 +29,7 @@ def envia_heartbeat(peer,id):
     if not data:
         for p in peers:
             if p.id == peer.id:
+                print 'peer inativo ', peer.id
                 p.ativo = False
 
 
@@ -129,7 +130,7 @@ def servidor(peer):
             #flag 3 indica heartbeart
             if msg[:1] == '3':
                 con.sendall('ok')
-                print 'heartbeat do id:',msg[1:]
+                print 'Heartbeat do id:',msg[1:]
             #se recebe uma mensagem com flag 4 indica uma troca de lider
             if msg[:1] =='4':
                 print 'Lider Alterado, novo lider: ', msg[1:]
@@ -159,6 +160,9 @@ if len(sys.argv) == 13:
 peers.sort(key=lambda x: x.id, reverse=False)
 
 
+print '----------------------------------------------------------------------------'
+print 'Inciando a execucao do programa como o peer de id:' , peer0.id
+print '----------------------------------------------------------------------------'
 
 #inicia as threads de servidor e cliente
 thread.start_new_thread(servidor,tuple([peer0]))

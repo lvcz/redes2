@@ -1,0 +1,48 @@
+----------------------------------------------------------------------------
+Inciando a execucao do programa como o peer de id: 2
+----------------------------------------------------------------------------
+aguardando todos os peers
+Lider Alterado, novo lider:  0
+todos os peers estao conectados
+Heartbeat do id: 1
+Lider Alterado, novo lider:  0
+Lider Alterado, novo lider:  0
+Lider Alterado, novo lider:  0
+Heartbeat do id: 0
+Heartbeat do id: 3
+Heartbeat do id: 1
+Heartbeat do id: 0
+Heartbeat do id: 3
+Heartbeat do id: 1
+Heartbeat do id: 3
+Heartbeat do id: 0
+Heartbeat do id: 1
+Heartbeat do id: 3
+peer inativo  0
+Lider Alterado, novo lider:  1
+Lider Alterado, novo lider:  1
+Heartbeat do id: 1
+Heartbeat do id: 3
+Lider Alterado, novo lider:  1
+Heartbeat do id: 1
+Heartbeat do id: 3
+Heartbeat do id: 3
+Heartbeat do id: 1
+Heartbeat do id: 1
+Heartbeat do id: 3
+Heartbeat do id: 1
+Heartbeat do id: 3
+Heartbeat do id: 1
+Heartbeat do id: 3
+Heartbeat do id: 3
+Heartbeat do id: 1
+Heartbeat do id: 3
+peer inativo  1
+Heartbeat do id: 3
+Lider Alterado, novo lider:  2
+Lider Alterado, novo lider:  2
+Heartbeat do id: 3
+Heartbeat do id: 3
+Heartbeat do id: 3
+Heartbeat do id: 3
+Heartbeat do id: 3
